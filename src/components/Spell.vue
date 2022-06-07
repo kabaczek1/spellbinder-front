@@ -26,23 +26,23 @@ const components = (v: boolean, s: boolean, m: string) => {
 };
 
 const deleteSpell = (id: number) => {
-    console.log(spells);
+    // console.log(spells);
     axios.delete(`${config.backend}/spells/${id}`).then(
         (response) => {
-            console.log(response);
+            // console.log(response);
             spells.forEach((spell) => {
                 if (spell.id == id) {
                     spells.splice(spells.indexOf(spell), 1);
                 }
             });
-            console.log(spells);
+            // console.log(spells);
         },
         (error) => {
             console.log(error);
             alert("delete spell error");
         }
     );
-    console.log(spells);
+    // console.log(spells);
 };
 </script>
 

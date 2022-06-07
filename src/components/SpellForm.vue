@@ -23,7 +23,7 @@ const blankSpell: SpellToAdd = {
     description: "",
 };
 
-let newSpell: SpellToAdd = reactive(blankSpell);
+const newSpell: SpellToAdd = reactive(blankSpell);
 
 const addspell = () => {
     //validation
