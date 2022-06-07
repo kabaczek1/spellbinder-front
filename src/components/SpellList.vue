@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-import Spell from "../interfaces/Spell";
+import { Spell } from "../interfaces/Spell";
 
 import SpellVue from "./Spell.vue";
 import SpellFormVue from "./SpellForm.vue";

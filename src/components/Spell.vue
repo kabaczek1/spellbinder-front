@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Spell from "../interfaces/Spell";
+import { Spell } from "../interfaces/Spell";
 import { spells, classes, casting_times, schools } from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
 import axios from "axios";

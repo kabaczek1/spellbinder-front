@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import Spell from "../interfaces/Spell";
+import { Spell, SpellToAdd } from "../interfaces/Spell";
 import { spells, classes, casting_times, schools } from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
 import config from "../data/config.json";
@@ -9,7 +9,7 @@ import axios from "axios";
 
 const showMaterialInput = ref(false);
 
-const blankSpell: Spell = {
+const blankSpell: SpellToAdd = {
     name: "",
     spellLevel: 0,
     spellSchool: 0,
@@ -23,7 +23,7 @@ const blankSpell: Spell = {
     description: "",
 };
 
-let newSpell: Spell = reactive(blankSpell);
+let newSpell: SpellToAdd = reactive(blankSpell);
 
 const addspell = () => {
     //validation
@@ -46,7 +46,7 @@ const addspell = () => {
         alert(validation_info);
         return;
     }
-    const spellToAdd: Spell = {
+    const spellToAdd: SpellToAdd = {
         name: newSpell.name,
         spellLevel: newSpell.spellLevel,
         spellSchool: newSpell.spellSchool,

@@ -1,7 +1,7 @@
 import config from "./data/config.json";
 import axios from "axios";
 import { reactive } from "vue";
-import Spell from "./interfaces/Spell";
+import { Spell } from "./interfaces/Spell";
 
 async function makearrayfromapi(route: string) {
     const res = await axios.get(`${config.backend}/${route}`);
