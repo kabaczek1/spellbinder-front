@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import Spell from "../interfaces/Spell";
-import { classes, casting_times, schools } from "../setup";
+import { spells, classes, casting_times, schools } from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
+import axios from "axios";
+import config from "../data/config.json";
 
 const props = defineProps<{
     spell: Spell;
@@ -21,6 +23,26 @@ const components = (v: boolean, s: boolean, m: string) => {
     if (s) comp_arr.push("S");
     if (m != "") comp_arr.push(`M (${m})`);
     return comp_arr.join(", ");
+};
+
+const deleteSpell = (id: number) => {
+    console.log(spells);
+    axios.delete(`${config.backend}/spells/${id}`).then(
+        (response) => {
+            console.log(response);
+            spells.forEach((spell) => {
+                if (spell.id == id) {
+                    spells.splice(spells.indexOf(spell), 1);
+                }
+            });
+            console.log(spells);
+        },
+        (error) => {
+            console.log(error);
+            alert("delete spell error");
+        }
+    );
+    console.log(spells);
 };
 </script>
 
@@ -48,6 +70,12 @@ const components = (v: boolean, s: boolean, m: string) => {
             {{ classes_string(classes, spell.class) }}
         </p>
         <p class="mt-4">{{ spell.description }}</p>
+        <button
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
+            @click="deleteSpell(spell.id)"
+        >
+            delete
+        </button>
     </div>
 </template>
 

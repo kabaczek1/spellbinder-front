@@ -2,6 +2,7 @@
 import { ref } from "vue";
 
 import Spell from "../interfaces/Spell";
+
 import SpellVue from "./Spell.vue";
 import SpellFormVue from "./SpellForm.vue";
 import SpellFilterVue from "./SpellFilter.vue";
@@ -10,15 +11,11 @@ import { spells, classes, casting_times, schools } from "../setup";
 
 const showAddForm = ref(false);
 const showFilterForm = ref(false);
-
-const deletespell = () => {
-    spells.pop();
-};
 </script>
 
 <template>
+    {{ spells }}
     <div class="flex flex-col justify-items-center">
-        <button @click="deletespell">deletespell</button>
         <button @click="showAddForm = !showAddForm">
             toggle add spell form
         </button>
@@ -27,7 +24,7 @@ const deletespell = () => {
         </button>
         <SpellFilterVue v-if="showFilterForm" />
         <SpellFormVue v-if="showAddForm" />
-        <SpellVue v-for="spell in spells" :key="spell.spellId" :spell="spell" />
+        <SpellVue v-for="spell in spells" :key="spell.id" :spell="spell" />
     </div>
 </template>
 
