@@ -121,7 +121,7 @@ const clearform = () => {
                     type="text"
                     v-model="newSpell.material"
                     placeholder="material component(s)"
-                    class="py-2 px-4"
+                    class="px-4"
                 />
             </label>
         </p>
