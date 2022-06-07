@@ -1,23 +1,11 @@
 <script setup lang="ts">
 import Spell from "../interfaces/Spell";
 import { classes, casting_times, schools } from "../main";
+import spelllvlarray from "../data/spelllvlarray.json";
 
 const props = defineProps<{
     spell: Spell;
 }>();
-
-const spelllvlarray = [
-    "Cantrip",
-    "1st-level",
-    "2nd-level",
-    "3rd-level",
-    "4th-level",
-    "5th-level",
-    "6th-level",
-    "7th-level",
-    "8th-level",
-    "9th-level",
-];
 
 const classes_string = (classes: Array<string>, id_list: Array<number>) => {
     let output: Array<string> = [];

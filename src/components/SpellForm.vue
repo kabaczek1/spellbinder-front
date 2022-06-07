@@ -3,6 +3,7 @@ import { reactive, ref } from "vue";
 import Spell from "../interfaces/Spell";
 import SpellVue from "./Spell.vue";
 import { spells, classes, casting_times, schools } from "../main";
+import spelllvlarray from "../data/spelllvlarray.json";
 
 const showMaterialInput = ref(false);
 
@@ -21,19 +22,6 @@ const blankSpell: Spell = {
 };
 
 let newSpell: Spell = reactive(blankSpell);
-
-const spelllvlarray = [
-    "Cantrip",
-    "1st-level",
-    "2nd-level",
-    "3rd-level",
-    "4th-level",
-    "5th-level",
-    "6th-level",
-    "7th-level",
-    "8th-level",
-    "9th-level",
-];
 
 const addspell = () => {
     //validate form
