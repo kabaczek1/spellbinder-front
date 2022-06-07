@@ -28,6 +28,23 @@ let newSpell: Spell = reactive(blankSpell);
 
 const addspell = () => {
     //validation
+    let validation_info = "";
+    if (newSpell.name == "") validation_info += "Spell must have a name\n";
+    if (newSpell.spellLevel < 0 && newSpell.spellLevel > 9)
+        validation_info += "Spell level must be between 0 and 9\n";
+    if (newSpell.spellSchool < 1 || newSpell.spellSchool > 8)
+        validation_info += "Spell level must be selected\n";
+    if (newSpell.castingTime < 1 || newSpell.castingTime > 7)
+        validation_info += "Casting time must be selected\n";
+    if (newSpell.range == "") validation_info += "Spell must have a range\n";
+    if (newSpell.duration == "")
+        validation_info += "Spell must have a duration\n";
+    if (newSpell.description == "")
+        validation_info += "Spell must have a description\n";
+    if (validation_info != "") {
+        alert(validation_info);
+        return;
+    }
     const spellToAdd: Spell = {
         name: newSpell.name,
         spellLevel: newSpell.spellLevel,
@@ -44,7 +61,7 @@ const addspell = () => {
     spells.push();
     axios.post(`${config.backend}/spells`, spellToAdd).then(
         (response) => {
-            console.log(response.data.id);
+            //console.log(response.data.id);
             spellToAdd.spellId = response.data.id;
             spells.push(spellToAdd);
         },
@@ -68,6 +85,12 @@ const clearform = () => {
     newSpell.duration = "";
     newSpell.class = [];
     newSpell.description = "";
+};
+
+const log = () => {
+    console.log(
+        `spellSchool: ${newSpell.spellSchool}, castingTime: ${newSpell.castingTime}`
+    );
 };
 </script>
 
@@ -152,8 +175,9 @@ const clearform = () => {
                     :value="index"
                     v-model="newSpell.class"
                     class="py-2 px-4"
+                    v-if="index != 0"
                 />
-                {{ pcclass }}
+                <span v-if="index != 0">{{ pcclass }}</span>
             </label>
         </p>
         <p class="mt-4">
@@ -169,6 +193,12 @@ const clearform = () => {
             @click="addspell"
         >
             addspell
+        </button>
+        <button
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
+            @click="log"
+        >
+            log
         </button>
     </div>
     <!-- testing -->
