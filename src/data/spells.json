@@ -1,0 +1,44 @@
+[
+    {
+        "name": "test1",
+        "description": "Lorem ipsum",
+        "spellLevel": 4,
+        "spellId": 0,
+        "spellSchool": 0,
+        "castingTime": 0,
+        "verbal": true,
+        "somatic": true,
+        "material": "amber",
+        "range": "60 feet",
+        "duration": "Instantaneous",
+        "class": [1, 2]
+    },
+    {
+        "name": "test2",
+        "description": "Lorem ipsum",
+        "spellLevel": 0,
+        "spellId": 0,
+        "spellSchool": 1,
+        "castingTime": 1,
+        "verbal": true,
+        "somatic": true,
+        "material": "",
+        "range": "60 feet",
+        "duration": "Instantaneous",
+        "class": [1, 2, 3]
+    },
+    {
+        "name": "test3",
+        "description": "Lorem ipsum",
+        "spellLevel": 0,
+        "spellId": 0,
+        "spellSchool": 2,
+        "castingTime": 4,
+        "verbal": true,
+        "somatic": false,
+        "material": "amber",
+        "range": "60 feet",
+        "duration": "Instantaneous",
+        "class": [0, 3]
+    }
+]
