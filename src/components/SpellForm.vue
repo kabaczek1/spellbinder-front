@@ -4,6 +4,7 @@ import Spell from "../interfaces/Spell";
 import SpellVue from "./Spell.vue";
 import { spells, classes, casting_times, schools } from "../main";
 import spelllvlarray from "../data/spelllvlarray.json";
+import config from "../data/config.json";
 
 import axios from "axios";
 
@@ -26,49 +27,33 @@ const blankSpell: Spell = {
 let newSpell: Spell = reactive(blankSpell);
 
 const addspell = () => {
-    //validate form
-    //send to db
-    //get all spells from db
-    // spells.push({
-    //     spellId: spells.length,
-    //     name: newSpell.name,
-    //     spellLevel: newSpell.spellLevel,
-    //     spellSchool: newSpell.spellSchool,
-    //     castingTime: newSpell.castingTime,
-    //     range: newSpell.range,
-    //     verbal: newSpell.verbal,
-    //     somatic: newSpell.somatic,
-    //     material: newSpell.material,
-    //     duration: newSpell.duration,
-    //     class: newSpell.class,
-    //     description: newSpell.description,
-    // });
-    axios
-        .post("/spells", {
-            spellId: spells.length,
-            name: newSpell.name,
-            spellLevel: newSpell.spellLevel,
-            spellSchool: newSpell.spellSchool,
-            castingTime: newSpell.castingTime,
-            range: newSpell.range,
-            verbal: newSpell.verbal,
-            somatic: newSpell.somatic,
-            material: newSpell.material,
-            duration: newSpell.duration,
-            class: newSpell.class,
-            description: newSpell.description,
-        })
-        .then(
-            (response) => {
-                console.log(response);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
+    //validation
+    const spellToAdd: Spell = {
+        name: newSpell.name,
+        spellLevel: newSpell.spellLevel,
+        spellSchool: newSpell.spellSchool,
+        castingTime: newSpell.castingTime,
+        range: newSpell.range,
+        verbal: newSpell.verbal,
+        somatic: newSpell.somatic,
+        material: newSpell.material,
+        duration: newSpell.duration,
+        class: newSpell.class,
+        description: newSpell.description,
+    };
+    spells.push();
+    axios.post(`${config.backend}/spells`, spellToAdd).then(
+        (response) => {
+            console.log(response.data.id);
+            spellToAdd.spellId = response.data.id;
+            spells.push(spellToAdd);
+        },
+        (error) => {
+            console.log(error);
+            alert("error");
+        }
+    );
     clearform();
-
-    //if not sent properly show alert
 };
 
 const clearform = () => {
