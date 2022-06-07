@@ -26,7 +26,7 @@ let newSpell: Spell = reactive(blankSpell);
 const addspell = () => {
     //validate form
     //send to db
-    //if sent properly get id and push to local array
+    //get all spells from db
     spells.push({
         spellId: spells.length,
         name: newSpell.name,
@@ -41,7 +41,23 @@ const addspell = () => {
         class: newSpell.class,
         description: newSpell.description,
     });
+    clearform();
+
     //if not sent properly show alert
+};
+
+const clearform = () => {
+    newSpell.name = "";
+    newSpell.spellLevel = 0;
+    newSpell.spellSchool = 0;
+    newSpell.castingTime = 0;
+    newSpell.range = "";
+    newSpell.verbal = false;
+    newSpell.somatic = false;
+    newSpell.material = "";
+    newSpell.duration = "";
+    newSpell.class = [];
+    newSpell.description = "";
 };
 </script>
 
@@ -49,64 +65,84 @@ const addspell = () => {
     <div
         class="lg:w-8/12 sm:w-11/12 bg-green-300 p-6 rounded-lg text-left my-2 m-auto"
     >
-        <button @click="addspell">addspell</button><br />
-        <input v-model="newSpell.name" type="text" placeholder="name" /><br />
-        <label
-            >Spell level:
+        <p class="text-2xl">
+            <input v-model="newSpell.name" type="text" placeholder="name" />
+        </p>
+        <p class="italic mt-4">
             <select v-model="newSpell.spellLevel">
                 <option v-for="(lvl, index) in spelllvlarray" :value="index">
                     {{ lvl }}
                 </option>
             </select>
-        </label>
-        <label
-            >School of magic:
             <select v-model="newSpell.spellSchool">
                 <option v-for="(school, index) in schools" :value="index">
                     {{ school }}
                 </option>
             </select>
-        </label>
-        <label
-            >Casting time:
+        </p>
+        <p>
+            <span class="font-bold">Casting Time:</span>
             <select v-model="newSpell.castingTime">
                 <option v-for="(time, index) in casting_times" :value="index">
                     {{ time }}
                 </option>
             </select>
-        </label>
-        <input v-model="newSpell.range" type="text" placeholder="range" /><br />
-        <label>
-            <input type="checkbox" v-model="newSpell.verbal" />
-            Verbal
-        </label>
-        <label>
-            <input type="checkbox" v-model="newSpell.somatic" />
-            Somatic
-        </label>
-        <label>
-            <input type="checkbox" v-model="showMaterialInput" />
-            Material
-        </label>
-        <label v-if="showMaterialInput">
-            <input type="text" v-model="newSpell.material" />
-            specify Material component
-        </label>
-        <input
-            v-model="newSpell.duration"
-            type="text"
-            placeholder="duration"
-        /><br />
-        <label v-for="(pcclass, index) in classes">
-            <input type="checkbox" :value="index" v-model="newSpell.class" />
-            {{ pcclass }}
-        </label>
-        <input
-            v-model="newSpell.description"
-            type="text"
-            placeholder="description"
-        /><br />
+        </p>
+        <p>
+            <span class="font-bold">Range:</span
+            ><input v-model="newSpell.range" type="text" placeholder="range" />
+        </p>
+        <p>
+            <span class="font-bold">Components:</span>
+            <label>
+                <input type="checkbox" v-model="newSpell.verbal" />
+                Verbal
+            </label>
+            <label>
+                <input type="checkbox" v-model="newSpell.somatic" />
+                Somatic
+            </label>
+            <label>
+                <input type="checkbox" v-model="showMaterialInput" />
+                Material
+            </label>
+            <label v-if="showMaterialInput">
+                <input
+                    type="text"
+                    v-model="newSpell.material"
+                    placeholder="material component(s)"
+                />
+            </label>
+        </p>
+        <p>
+            <span class="font-bold">Duration:</span>
+            <input
+                v-model="newSpell.duration"
+                type="text"
+                placeholder="duration"
+            />
+        </p>
+        <p>
+            <span class="font-bold">Classes:</span>
+            <label v-for="(pcclass, index) in classes">
+                <input
+                    type="checkbox"
+                    :value="index"
+                    v-model="newSpell.class"
+                />
+                {{ pcclass }}
+            </label>
+        </p>
+        <p class="mt-4">
+            <input
+                v-model="newSpell.description"
+                type="text"
+                placeholder="description"
+            />
+        </p>
+        <button @click="addspell">addspell</button>
     </div>
+    <!-- testing -->
     <SpellVue :spell="newSpell" />
 </template>
 
