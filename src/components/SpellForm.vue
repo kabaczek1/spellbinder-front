@@ -66,7 +66,12 @@ const clearform = () => {
         class="lg:w-8/12 sm:w-11/12 bg-green-300 p-6 rounded-lg text-left my-2 m-auto"
     >
         <p class="text-2xl">
-            <input v-model="newSpell.name" type="text" placeholder="name" />
+            <input
+                v-model="newSpell.name"
+                type="text"
+                placeholder="name"
+                class="py-2 px-4"
+            />
         </p>
         <p class="italic mt-4">
             <select v-model="newSpell.spellLevel">
@@ -81,7 +86,7 @@ const clearform = () => {
             </select>
         </p>
         <p>
-            <span class="font-bold">Casting Time:</span>
+            <span class="font-bold">Casting Time: </span>
             <select v-model="newSpell.castingTime">
                 <option v-for="(time, index) in casting_times" :value="index">
                     {{ time }}
@@ -89,11 +94,16 @@ const clearform = () => {
             </select>
         </p>
         <p>
-            <span class="font-bold">Range:</span
-            ><input v-model="newSpell.range" type="text" placeholder="range" />
+            <span class="font-bold">Range: </span
+            ><input
+                v-model="newSpell.range"
+                type="text"
+                placeholder="range"
+                class="py-2 px-4"
+            />
         </p>
         <p>
-            <span class="font-bold">Components:</span>
+            <span class="font-bold">Components: </span>
             <label>
                 <input type="checkbox" v-model="newSpell.verbal" />
                 Verbal
@@ -111,24 +121,27 @@ const clearform = () => {
                     type="text"
                     v-model="newSpell.material"
                     placeholder="material component(s)"
+                    class="py-2 px-4"
                 />
             </label>
         </p>
         <p>
-            <span class="font-bold">Duration:</span>
+            <span class="font-bold">Duration: </span>
             <input
                 v-model="newSpell.duration"
                 type="text"
                 placeholder="duration"
+                class="py-2 px-4"
             />
         </p>
         <p>
-            <span class="font-bold">Classes:</span>
+            <span class="font-bold">Classes: </span>
             <label v-for="(pcclass, index) in classes">
                 <input
                     type="checkbox"
                     :value="index"
                     v-model="newSpell.class"
+                    class="py-2 px-4"
                 />
                 {{ pcclass }}
             </label>
@@ -138,9 +151,15 @@ const clearform = () => {
                 v-model="newSpell.description"
                 type="text"
                 placeholder="description"
+                class="py-2 px-4"
             />
         </p>
-        <button @click="addspell">addspell</button>
+        <button
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
+            @click="addspell"
+        >
+            addspell
+        </button>
     </div>
     <!-- testing -->
     <SpellVue :spell="newSpell" />
