@@ -2,7 +2,7 @@
 import { reactive, ref } from "vue";
 import Spell from "../interfaces/Spell";
 import SpellVue from "./Spell.vue";
-import { spells, classes, casting_times, schools } from "../main";
+import { spells, classes, casting_times, schools } from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
 import config from "../data/config.json";
 

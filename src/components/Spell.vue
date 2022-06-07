@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Spell from "../interfaces/Spell";
-import { classes, casting_times, schools } from "../main";
+import { classes, casting_times, schools } from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
 
 const props = defineProps<{
