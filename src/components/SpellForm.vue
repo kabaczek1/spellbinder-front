@@ -8,6 +8,7 @@ import {
     schools,
     newSpell,
     spellToUpdateId,
+    showAddForm,
 } from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
 import config from "../data/config.json";
@@ -92,14 +93,18 @@ const updatespell = () => {
             (response) => {
                 //console.log(response.data);
                 spells.push(spellToUpdate);
+                spells.sort((a, b) => {
+                    return a.id - b.id;
+                });
                 spellToUpdateId.value = -1;
+                clearform();
+                showAddForm.value = false;
             },
             (error) => {
                 console.log(error);
                 alert("update error");
             }
         );
-    clearform();
 };
 
 const clearform = () => {

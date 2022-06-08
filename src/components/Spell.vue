@@ -73,6 +73,7 @@ const sendSpellToUpdate = (id: number) => {
     newSpell.description = spellToUpdate.description;
     showAddForm.value = true;
     spells.splice(spells.indexOf(spellToUpdate), 1); // visible = 0
+    window.scrollTo(0, 0);
 };
 </script>
 
@@ -107,6 +108,7 @@ const sendSpellToUpdate = (id: number) => {
             delete
         </button>
         <button
+            v-show="spellToUpdateId == -1"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
             @click="sendSpellToUpdate(spell.id)"
         >
