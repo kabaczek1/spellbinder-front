@@ -27,3 +27,18 @@ export interface SpellToAdd {
     class: Array<number>;
     description: string;
 }
+
+export interface SpellToSendToDb {
+    id?: number;
+    name: string;
+    description: string;
+    spellLevel: number;
+    spellSchoolId: number;
+    verbal: boolean;
+    somatic: boolean;
+    material: string;
+    range: string;
+    duration: string;
+    castingTimeId: number;
+    classes: number[];
+}

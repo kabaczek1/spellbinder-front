@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import { Spell, SpellToAdd } from "../interfaces/Spell";
+import { Spell, SpellToAdd, SpellToSendToDb } from "../interfaces/Spell";
 import {
     spells,
     classes,
@@ -43,17 +43,17 @@ const spellFormValidation = (): Boolean => {
 const addspell = () => {
     //validation
     if (!spellFormValidation()) return;
-    const spellToAdd: SpellToAdd = {
+    const spellToAdd: SpellToSendToDb = {
         name: newSpell.name,
         spellLevel: newSpell.spellLevel,
-        spellSchool: newSpell.spellSchool,
-        castingTime: newSpell.castingTime,
+        spellSchoolId: newSpell.spellSchool,
+        castingTimeId: newSpell.castingTime,
         range: newSpell.range,
         verbal: newSpell.verbal,
         somatic: newSpell.somatic,
         material: newSpell.material,
         duration: newSpell.duration,
-        class: newSpell.class,
+        classes: newSpell.class,
         description: newSpell.description,
     };
     axios.post(`${config.backend}/spells`, spellToAdd).then(
@@ -73,18 +73,18 @@ const addspell = () => {
 const updatespell = () => {
     //validation
     if (!spellFormValidation()) return;
-    const spellToUpdate: Spell = {
+    const spellToUpdate: SpellToSendToDb = {
         id: spellToUpdateId.value,
         name: newSpell.name,
         spellLevel: newSpell.spellLevel,
-        spellSchool: newSpell.spellSchool,
-        castingTime: newSpell.castingTime,
+        spellSchoolId: newSpell.spellSchool,
+        castingTimeId: newSpell.castingTime,
         range: newSpell.range,
         verbal: newSpell.verbal,
         somatic: newSpell.somatic,
         material: newSpell.material,
         duration: newSpell.duration,
-        class: newSpell.class,
+        classes: newSpell.class,
         description: newSpell.description,
     };
     axios
