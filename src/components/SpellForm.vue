@@ -22,9 +22,12 @@ const spellFormValidation = (): Boolean => {
     if (newSpell.name == "") validation_info += "Spell must have a name\n";
     if (newSpell.spellLevel < 0 && newSpell.spellLevel > 9)
         validation_info += "Spell level must be between 0 and 9\n";
-    if (newSpell.spellSchool < 1 || newSpell.spellSchool > 8)
+    if (newSpell.spellSchool < 1 || newSpell.spellSchool > schools.length - 1)
         validation_info += "Spell school must be selected\n";
-    if (newSpell.castingTime < 1 || newSpell.castingTime > 7)
+    if (
+        newSpell.castingTime < 1 ||
+        newSpell.castingTime > casting_times.length - 1
+    )
         validation_info += "Casting time must be selected\n";
     if (newSpell.range == "") validation_info += "Spell must have a range\n";
     if (newSpell.duration == "")
@@ -41,6 +44,7 @@ const spellFormValidation = (): Boolean => {
 };
 
 const addspell = () => {
+    console.log(casting_times);
     //validation
     if (!spellFormValidation()) return;
     const spellToAdd: BackendSpell = {
@@ -56,13 +60,15 @@ const addspell = () => {
         classes: newSpell.class,
         description: newSpell.description,
     };
+    console.log(newSpell.castingTime);
+    console.log(spellToAdd.castingTimeId);
     axios.post(`${config.backend}/spells`, spellToAdd).then(
         (response) => {
-            console.log("response");
+            // console.log("response");
             console.log(response.data);
-            console.log("response.data.id");
-            console.log(response.data.id);
-            console.log(spells);
+            // console.log("response.data.id");
+            // console.log(response.data.id);
+            // console.log(spells);
             spells.push({
                 id: response.data.id,
                 name: response.data.name,
