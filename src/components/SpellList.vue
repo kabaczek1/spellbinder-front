@@ -15,16 +15,16 @@ const showFilterForm = ref(false);
 <template>
     <!-- {{ spells }} -->
     <button
-        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg m-4 ml-8 w-32"
+        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg m-4 ml-8 w-48"
         @click="showAddForm = !showAddForm"
     >
-        Spell form
+        {{ showAddForm ? "Hide" : "Show" }} spell form
     </button>
     <button
-        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg m-4 w-32"
+        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg m-4 w-48"
         @click="showFilterForm = !showFilterForm"
     >
-        Spell filter
+        {{ showFilterForm ? "Hide" : "Show" }} spell filter
     </button>
     <div class="flex flex-col justify-items-center">
         <SpellFilterVue v-if="showFilterForm" />

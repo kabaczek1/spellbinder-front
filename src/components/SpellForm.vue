@@ -44,7 +44,7 @@ const spellFormValidation = (): Boolean => {
 };
 
 const addspell = () => {
-    console.log(casting_times);
+    // console.log(casting_times);
     //validation
     if (!spellFormValidation()) return;
     const spellToAdd: BackendSpell = {
@@ -60,12 +60,12 @@ const addspell = () => {
         classes: newSpell.class,
         description: newSpell.description,
     };
-    console.log(newSpell.castingTime);
-    console.log(spellToAdd.castingTimeId);
+    // console.log(newSpell.castingTime);
+    // console.log(spellToAdd.castingTimeId);
     axios.post(`${config.backend}/spells`, spellToAdd).then(
         (response) => {
             // console.log("response");
-            console.log(response.data);
+            // console.log(response.data);
             // console.log("response.data.id");
             // console.log(response.data.id);
             // console.log(spells);
