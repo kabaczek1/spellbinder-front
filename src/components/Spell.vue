@@ -45,6 +45,7 @@ const findSpellbuId = (id: number) => {
 };
 
 const deleteSpell = (id: number) => {
+    if (!confirm("delete spell?")) return;
     axios.delete(`${config.backend}/spells/${id}`).then(
         (response) => {
             spells.splice(spells.indexOf(findSpellbuId(id)), 1);
