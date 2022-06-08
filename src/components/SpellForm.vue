@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import { Spell, SpellToAdd } from "../interfaces/Spell";
-import { spells, classes, casting_times, schools } from "../setup";
+import {
+    spells,
+    classes,
+    casting_times,
+    schools,
+    newSpell,
+    spellToUpdateId,
+} from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
 import config from "../data/config.json";
 
@@ -9,24 +16,7 @@ import axios from "axios";
 
 const showMaterialInput = ref(false);
 
-const blankSpell: SpellToAdd = {
-    name: "",
-    spellLevel: 0,
-    spellSchool: 0,
-    castingTime: 0,
-    range: "",
-    verbal: false,
-    somatic: false,
-    material: "",
-    duration: "",
-    class: [],
-    description: "",
-};
-
-const newSpell: SpellToAdd = reactive(blankSpell);
-
-const addspell = () => {
-    //validation
+const spellFormValidation = (): Boolean => {
     let validation_info = "";
     if (newSpell.name == "") validation_info += "Spell must have a name\n";
     if (newSpell.spellLevel < 0 && newSpell.spellLevel > 9)
@@ -44,8 +34,14 @@ const addspell = () => {
         validation_info += "Spell must have a description\n";
     if (validation_info != "") {
         alert(validation_info);
-        return;
+        return false;
     }
+    return true;
+};
+
+const addspell = () => {
+    //validation
+    if (!spellFormValidation()) return;
     const spellToAdd: SpellToAdd = {
         name: newSpell.name,
         spellLevel: newSpell.spellLevel,
@@ -59,10 +55,9 @@ const addspell = () => {
         class: newSpell.class,
         description: newSpell.description,
     };
-    spells.push();
     axios.post(`${config.backend}/spells`, spellToAdd).then(
         (response) => {
-            //console.log(response.data.id);
+            console.log(response.data);
             spellToAdd.id = response.data.id;
             spells.push(spellToAdd);
         },
@@ -71,6 +66,39 @@ const addspell = () => {
             alert("error");
         }
     );
+    clearform();
+};
+
+const updatespell = () => {
+    //validation
+    if (!spellFormValidation()) return;
+    const spellToUpdate: Spell = {
+        id: spellToUpdateId.value,
+        name: newSpell.name,
+        spellLevel: newSpell.spellLevel,
+        spellSchool: newSpell.spellSchool,
+        castingTime: newSpell.castingTime,
+        range: newSpell.range,
+        verbal: newSpell.verbal,
+        somatic: newSpell.somatic,
+        material: newSpell.material,
+        duration: newSpell.duration,
+        class: newSpell.class,
+        description: newSpell.description,
+    };
+    axios
+        .put(`${config.backend}/spells/${spellToUpdateId.value}`, spellToUpdate)
+        .then(
+            (response) => {
+                console.log(response.data);
+                spells.push(spellToUpdate);
+                spellToUpdateId.value = -1;
+            },
+            (error) => {
+                console.log(error);
+                alert("update error");
+            }
+        );
     clearform();
 };
 
@@ -184,10 +212,18 @@ const clearform = () => {
             />
         </p>
         <button
+            v-show="spellToUpdateId == -1"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
             @click="addspell"
         >
-            addspell
+            add spell
+        </button>
+        <button
+            v-show="spellToUpdateId != -1"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
+            @click="updatespell"
+        >
+            update spell
         </button>
     </div>
 </template>

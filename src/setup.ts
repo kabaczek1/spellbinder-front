@@ -1,7 +1,7 @@
 import config from "./data/config.json";
 import axios from "axios";
-import { reactive } from "vue";
-import { Spell } from "./interfaces/Spell";
+import { reactive, ref } from "vue";
+import { Spell, SpellToAdd } from "./interfaces/Spell";
 
 async function makearrayfromapi(route: string) {
     const res = await axios.get(`${config.backend}/${route}`);
@@ -22,3 +22,21 @@ export const spells = reactive(await getspells());
 export const classes = reactive(await makearrayfromapi("classes"));
 export const schools = reactive(await makearrayfromapi("spellschools"));
 export const casting_times = reactive(await makearrayfromapi("castingtimes"));
+
+export const blankSpell: SpellToAdd = {
+    name: "",
+    spellLevel: 0,
+    spellSchool: 0,
+    castingTime: 0,
+    range: "",
+    verbal: false,
+    somatic: false,
+    material: "",
+    duration: "",
+    class: [],
+    description: "",
+};
+
+export const showAddForm = ref(false);
+export const spellToUpdateId = ref(-1);
+export const newSpell: SpellToAdd = reactive(blankSpell);

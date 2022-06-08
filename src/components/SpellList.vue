@@ -7,9 +7,8 @@ import SpellVue from "./Spell.vue";
 import SpellFormVue from "./SpellForm.vue";
 import SpellFilterVue from "./SpellFilter.vue";
 
-import { spells, classes, casting_times, schools } from "../setup";
+import { spells, classes, casting_times, schools, showAddForm } from "../setup";
 
-const showAddForm = ref(false);
 const showFilterForm = ref(false);
 </script>
 

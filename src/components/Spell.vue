@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import { Spell } from "../interfaces/Spell";
-import { spells, classes, casting_times, schools } from "../setup";
+import {
+    spells,
+    classes,
+    casting_times,
+    schools,
+    newSpell,
+    blankSpell,
+    spellToUpdateId,
+    showAddForm,
+} from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
 import axios from "axios";
 import config from "../data/config.json";
@@ -25,16 +34,27 @@ const components = (v: boolean, s: boolean, m: string) => {
     return comp_arr.join(", ");
 };
 
+const findSpellbuId = (id: number) => {
+    let output: Spell = {};
+    spells.forEach((spell) => {
+        if (spell.id == id) {
+            output = spell;
+        }
+    });
+    return output;
+};
+
 const deleteSpell = (id: number) => {
     // console.log(spells);
     axios.delete(`${config.backend}/spells/${id}`).then(
         (response) => {
             // console.log(response);
-            spells.forEach((spell) => {
-                if (spell.id == id) {
-                    spells.splice(spells.indexOf(spell), 1);
-                }
-            });
+            // spells.forEach((spell) => {
+            //     if (spell.id == id) {
+            //         spells.splice(spells.indexOf(spell), 1);
+            //     }
+            // });
+            spells.splice(spells.indexOf(findSpellbuId(id)), 1);
             // console.log(spells);
         },
         (error) => {
@@ -43,6 +63,24 @@ const deleteSpell = (id: number) => {
         }
     );
     // console.log(spells);
+};
+
+const sendSpellToUpdate = (id: number) => {
+    const spellToUpdate = findSpellbuId(id);
+    spellToUpdateId.value = id;
+    newSpell.name = spellToUpdate.name;
+    newSpell.spellLevel = spellToUpdate.spellLevel;
+    newSpell.spellSchool = spellToUpdate.spellSchool;
+    newSpell.castingTime = spellToUpdate.castingTime;
+    newSpell.range = spellToUpdate.range;
+    newSpell.verbal = spellToUpdate.verbal;
+    newSpell.somatic = spellToUpdate.somatic;
+    newSpell.material = spellToUpdate.material;
+    newSpell.duration = spellToUpdate.duration;
+    newSpell.class = spellToUpdate.class;
+    newSpell.description = spellToUpdate.description;
+    showAddForm.value = true;
+    spells.splice(spells.indexOf(spellToUpdate), 1); // visible = 0
 };
 </script>
 
@@ -75,6 +113,12 @@ const deleteSpell = (id: number) => {
             @click="deleteSpell(spell.id)"
         >
             delete
+        </button>
+        <button
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
+            @click="sendSpellToUpdate(spell.id)"
+        >
+            update
         </button>
     </div>
 </template>
