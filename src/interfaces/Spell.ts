@@ -11,6 +11,7 @@ export interface Spell {
     duration: string;
     class: Array<number>;
     description: string;
+    show: boolean;
 }
 
 export interface SpellToAdd {

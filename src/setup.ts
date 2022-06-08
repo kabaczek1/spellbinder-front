@@ -30,6 +30,7 @@ async function getspells(): Promise<Spell[]> {
             duration: spell.duration,
             class: spell.classes,
             description: spell.description,
+            show: true,
         };
         output.push(x);
     });

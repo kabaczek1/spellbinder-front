@@ -58,7 +58,10 @@ const addspell = () => {
     };
     axios.post(`${config.backend}/spells`, spellToAdd).then(
         (response) => {
+            console.log("response");
             console.log(response.data);
+            console.log("response.data.id");
+            console.log(response.data.id);
             console.log(spells);
             spells.push({
                 id: response.data.id,
@@ -73,6 +76,7 @@ const addspell = () => {
                 duration: response.data.duration,
                 class: response.data.classes,
                 description: response.data.description,
+                show: true,
             });
             spells.sort((a, b) => {
                 return a.id - b.id;
@@ -121,6 +125,7 @@ const updatespell = () => {
                 duration: spellToUpdate.duration,
                 class: spellToUpdate.classes,
                 description: spellToUpdate.description,
+                show: true,
             });
             spells.sort((a, b) => {
                 return a.id - b.id;
