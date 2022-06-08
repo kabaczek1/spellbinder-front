@@ -69,18 +69,23 @@ const showallspells = () => {
                 class="py-2 px-4"
             />
         </p>
-        <p class="italic mt-4">
+        <p>
             <label
                 ><input
                     type="checkbox"
                     v-model="filteringSpell.allowSpellLevelFiltering"
                 />filter by spell level</label
             >
-            <select v-model="filteringSpell.spellLevel">
+            <select
+                v-model="filteringSpell.spellLevel"
+                v-show="filteringSpell.allowSpellLevelFiltering"
+            >
                 <option v-for="(lvl, index) in spelllvlarray" :value="index">
                     {{ lvl }}
                 </option>
             </select>
+        </p>
+        <p>
             <select v-model="filteringSpell.spellSchool">
                 <option v-for="(school, index) in schools" :value="index">
                     {{ school }}
