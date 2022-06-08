@@ -28,12 +28,12 @@ const showImportExport = ref(false);
     >
         {{ showFilterForm ? "Hide" : "Show" }} spell filter
     </button>
-    <button
+    <!-- <button
         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg m-4 w-48"
         @click="showImportExport = !showImportExport"
     >
         {{ showImportExport ? "Hide" : "Show" }} Import/Export
-    </button>
+    </button> -->
     <div class="flex flex-col justify-items-center">
         <SpellFilterVue v-show="showFilterForm" />
         <SpellFormVue v-show="showAddForm" />

@@ -28,3 +28,17 @@ export interface BackendSpell {
     castingTimeId: number;
     classes: number[];
 }
+
+export interface ExportSpell {
+    name: string;
+    spellLevel: number;
+    spellSchool: number;
+    castingTime: number;
+    range: string;
+    verbal: boolean;
+    somatic: boolean;
+    material: string;
+    duration: string;
+    class: Array<number>;
+    description: string;
+}

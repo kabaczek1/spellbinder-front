@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import { Spell } from "../interfaces/Spell";
+import { Spell, ExportSpell } from "../interfaces/Spell";
 import SpellVue from "./Spell.vue";
 import { spells, classes, casting_times, schools } from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
@@ -25,9 +25,31 @@ const export_data = () => {
     const date = new Date();
     let data: string = "";
     let filename = `spells_${date.getDate()}_${date.getMonth()}_${date.getFullYear()}_${date.getTime()}`;
+
+    let spellsToExport: ExportSpell[] = [];
+    // if (exportOnlyShown) {
+    //     spells.forEach((spell) => {
+    //         if (spell.show) {
+    //             spellsToExport.push({
+    //                 name: spell.name,
+    //                 spellLevel: spell.spellLevel,
+    //                 spellSchool: spell.spellSchool,
+    //                 castingTime: spell.castingTime,
+    //                 range: spell.range,
+    //                 verbal: spell.verbal,
+    //                 somatic: spell.somatic,
+    //                 material: spell.material,
+    //                 duration: spell.duration,
+    //                 class: spell.class,
+    //                 description: spell.description,
+    //             });
+    //         }
+    //     });
+    // }
+
     if (fileformat.value == "JSON") {
         filename += ".json";
-        data = JSON.stringify(spells);
+        data = JSON.stringify(spellsToExport);
     }
     if (fileformat.value == "XML") {
         filename += ".xml";
