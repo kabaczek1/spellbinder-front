@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import { Spell, SpellToAdd, BackendSpell } from "../interfaces/Spell";
+import { Spell, BackendSpell } from "../interfaces/Spell";
 import {
     spells,
     classes,
