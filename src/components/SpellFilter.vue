@@ -17,7 +17,9 @@ const filteringSpell = reactive({
 });
 
 const findspells = () => {
-    console.log("test");
+    spells.forEach((spell) => {
+        console.log(Object.keys(filteringSpell));
+    });
 };
 const showallspells = () => {
     spells.forEach((spell) => {
