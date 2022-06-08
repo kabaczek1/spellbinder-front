@@ -59,8 +59,26 @@ const addspell = () => {
     axios.post(`${config.backend}/spells`, spellToAdd).then(
         (response) => {
             console.log(response.data);
-            spellToAdd.id = response.data.id;
-            spells.push(spellToAdd);
+            console.log(spells);
+            spells.push({
+                id: response.data.id,
+                name: response.data.name,
+                spellLevel: response.data.spellLevel,
+                spellSchool: response.data.spellSchoolId,
+                castingTime: response.data.castingTimeId,
+                range: response.data.range,
+                verbal: response.data.verbal,
+                somatic: response.data.somatic,
+                material: response.data.material,
+                duration: response.data.duration,
+                class: response.data.classes,
+                description: response.data.description,
+            });
+            spells.sort((a, b) => {
+                return a.id - b.id;
+            });
+            console.log(spells);
+            clearform();
         },
         (error) => {
             console.log(error);
@@ -87,24 +105,35 @@ const updatespell = () => {
         classes: newSpell.class,
         description: newSpell.description,
     };
-    axios
-        .put(`${config.backend}/spells/${spellToUpdateId.value}`, spellToUpdate)
-        .then(
-            (response) => {
-                //console.log(response.data);
-                spells.push(spellToUpdate);
-                spells.sort((a, b) => {
-                    return a.id - b.id;
-                });
-                spellToUpdateId.value = -1;
-                clearform();
-                showAddForm.value = false;
-            },
-            (error) => {
-                console.log(error);
-                alert("update error");
-            }
-        );
+    axios.put(`${config.backend}/spells`, spellToUpdate).then(
+        (response) => {
+            //newSpell.id = spellToUpdateId.value;
+            spells.push({
+                id: spellToUpdate.id,
+                name: spellToUpdate.name,
+                spellLevel: spellToUpdate.spellLevel,
+                spellSchool: spellToUpdate.spellSchoolId,
+                castingTime: spellToUpdate.castingTimeId,
+                range: spellToUpdate.range,
+                verbal: spellToUpdate.verbal,
+                somatic: spellToUpdate.somatic,
+                material: spellToUpdate.material,
+                duration: spellToUpdate.duration,
+                class: spellToUpdate.classes,
+                description: spellToUpdate.description,
+            });
+            spells.sort((a, b) => {
+                return a.id - b.id;
+            });
+            spellToUpdateId.value = -1;
+            clearform();
+            showAddForm.value = false;
+        },
+        (error) => {
+            console.log(error);
+            alert("update error");
+        }
+    );
 };
 
 const clearform = () => {

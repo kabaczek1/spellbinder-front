@@ -1,7 +1,7 @@
 import config from "./data/config.json";
 import axios from "axios";
 import { reactive, ref } from "vue";
-import { Spell, SpellToAdd } from "./interfaces/Spell";
+import { Spell, SpellToAdd, BackendSpell } from "./interfaces/Spell";
 
 async function makearrayfromapi(route: string) {
     const res = await axios.get(`${config.backend}/${route}`);
@@ -15,7 +15,28 @@ async function makearrayfromapi(route: string) {
 
 async function getspells(): Promise<Spell[]> {
     const res = await axios.get(`${config.backend}/spells`);
-    return res.data;
+    const output: Spell[] = [];
+    res.data.forEach((spell: BackendSpell) => {
+        let x: Spell = {
+            id: spell.id,
+            name: spell.name,
+            spellLevel: spell.spellLevel,
+            spellSchool: spell.spellSchoolId,
+            castingTime: spell.castingTimeId,
+            range: spell.range,
+            verbal: spell.verbal,
+            somatic: spell.somatic,
+            material: spell.material,
+            duration: spell.duration,
+            class: spell.classes,
+            description: spell.description,
+        };
+        output.push(x);
+    });
+    output.sort((a, b) => {
+        return a.id - b.id;
+    });
+    return output;
 }
 
 export const spells = reactive(await getspells());
