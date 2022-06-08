@@ -7,18 +7,47 @@ import spelllvlarray from "../data/spelllvlarray.json";
 
 const filteringSpell = reactive({
     name: "",
+    allowSpellLevelFiltering: false,
     spellLevel: 0,
     spellSchool: 0,
     castingTime: 0,
-    verbal: true,
-    somatic: true,
-    material: true,
+    verbal: false,
+    somatic: false,
+    material: false,
     class: [],
 });
 
 const findspells = () => {
     spells.forEach((spell) => {
-        console.log(Object.keys(filteringSpell));
+        spell.show = true;
+        //console.log(spell.name);
+        if (filteringSpell.name != "") {
+            if (!spell.name.match(filteringSpell.name)) spell.show = false; // tolowercase?
+        }
+        if (filteringSpell.allowSpellLevelFiltering == true) {
+            if (filteringSpell.spellLevel != spell.spellLevel)
+                spell.show = false;
+        }
+        if (filteringSpell.spellSchool != 0) {
+            if (filteringSpell.spellSchool != spell.spellSchool)
+                spell.show = false;
+        }
+        if (filteringSpell.castingTime != 0) {
+            if (filteringSpell.castingTime != spell.castingTime)
+                spell.show = false;
+        }
+        if (filteringSpell.verbal) {
+            if (!spell.verbal) spell.show = false;
+        }
+        if (filteringSpell.somatic) {
+            if (!spell.somatic) spell.show = false;
+        }
+        if (filteringSpell.material) {
+            if (!spell.material) spell.show = false;
+        }
+        filteringSpell.class.forEach((id) => {
+            if (spell.class.indexOf(id) == -1) spell.show = false;
+        });
     });
 };
 const showallspells = () => {
@@ -41,6 +70,12 @@ const showallspells = () => {
             />
         </p>
         <p class="italic mt-4">
+            <label
+                ><input
+                    type="checkbox"
+                    v-model="filteringSpell.allowSpellLevelFiltering"
+                />filter by spell level</label
+            >
             <select v-model="filteringSpell.spellLevel">
                 <option v-for="(lvl, index) in spelllvlarray" :value="index">
                     {{ lvl }}

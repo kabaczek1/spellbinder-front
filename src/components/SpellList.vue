@@ -27,8 +27,8 @@ const showFilterForm = ref(false);
         {{ showFilterForm ? "Hide" : "Show" }} spell filter
     </button>
     <div class="flex flex-col justify-items-center">
-        <SpellFilterVue v-if="showFilterForm" />
-        <SpellFormVue v-if="showAddForm" />
+        <SpellFilterVue v-show="showFilterForm" />
+        <SpellFormVue v-show="showAddForm" />
         <SpellVue v-for="spell in spells" :key="spell.id" :spell="spell" />
     </div>
 </template>
