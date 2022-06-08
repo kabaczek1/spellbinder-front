@@ -90,7 +90,7 @@ const updatespell = () => {
         .put(`${config.backend}/spells/${spellToUpdateId.value}`, spellToUpdate)
         .then(
             (response) => {
-                console.log(response.data);
+                //console.log(response.data);
                 spells.push(spellToUpdate);
                 spellToUpdateId.value = -1;
             },
