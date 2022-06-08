@@ -79,6 +79,7 @@ const sendSpellToUpdate = (id: number) => {
 
 <template>
     <div
+        v-show="spell.show"
         class="lg:w-8/12 sm:w-11/12 bg-green-300 p-6 rounded-lg text-left my-2 m-auto"
     >
         <p class="text-2xl">{{ spell.name }}</p>
@@ -113,6 +114,12 @@ const sendSpellToUpdate = (id: number) => {
             @click="sendSpellToUpdate(spell.id)"
         >
             update
+        </button>
+        <button
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-4"
+            @click="spell.show = false"
+        >
+            hide
         </button>
     </div>
 </template>
