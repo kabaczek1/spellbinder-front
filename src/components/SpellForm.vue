@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import { Spell, SpellToAdd, SpellToSendToDb } from "../interfaces/Spell";
+import { Spell, SpellToAdd, BackendSpell } from "../interfaces/Spell";
 import {
     spells,
     classes,
@@ -43,7 +43,7 @@ const spellFormValidation = (): Boolean => {
 const addspell = () => {
     //validation
     if (!spellFormValidation()) return;
-    const spellToAdd: SpellToSendToDb = {
+    const spellToAdd: BackendSpell = {
         name: newSpell.name,
         spellLevel: newSpell.spellLevel,
         spellSchoolId: newSpell.spellSchool,
@@ -73,7 +73,7 @@ const addspell = () => {
 const updatespell = () => {
     //validation
     if (!spellFormValidation()) return;
-    const spellToUpdate: SpellToSendToDb = {
+    const spellToUpdate: BackendSpell = {
         id: spellToUpdateId.value,
         name: newSpell.name,
         spellLevel: newSpell.spellLevel,

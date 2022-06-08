@@ -28,7 +28,7 @@ export interface SpellToAdd {
     description: string;
 }
 
-export interface SpellToSendToDb {
+export interface BackendSpell {
     id?: number;
     name: string;
     description: string;
