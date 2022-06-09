@@ -9,7 +9,7 @@ export interface Spell {
     somatic: boolean;
     material: string;
     duration: string;
-    class: Array<number>;
+    class: number[];
     description: string;
     show: boolean;
 }
@@ -39,6 +39,6 @@ export interface ExportSpell {
     somatic: boolean;
     material: string;
     duration: string;
-    class: Array<number>;
+    class: number[];
     description: string;
 }
