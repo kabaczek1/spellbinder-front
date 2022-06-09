@@ -55,7 +55,7 @@ export const blankSpell = {
     somatic: false,
     material: "",
     duration: "",
-    class: [],
+    class: [1],
     description: "",
 };
 
