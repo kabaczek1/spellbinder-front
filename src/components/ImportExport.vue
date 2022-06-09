@@ -76,7 +76,12 @@ const export_data = () => {
         <label
             ><input type="checkbox" v-model="exportOnlyShown" />Export only
             currently shown spells</label
-        >
+        ><br />
+        <span class="font-bold">{{
+            exportOnlyShown
+                ? "Only currently shown spells will be exported"
+                : "All spells will be exported"
+        }}</span>
         <p>
             <span class="font-bold">File format: </span>
             <select v-model="fileformat">
