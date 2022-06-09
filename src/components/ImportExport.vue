@@ -26,26 +26,35 @@ const export_data = () => {
     let data: string = "";
     let filename = `spells_${date.getDate()}_${date.getMonth()}_${date.getFullYear()}_${date.getTime()}`;
 
+    const addSpellToExportArray = (spell: Spell) => {
+        spellsToExport.push({
+            name: spell.name,
+            spellLevel: spell.spellLevel,
+            spellSchool: spell.spellSchool,
+            castingTime: spell.castingTime,
+            range: spell.range,
+            verbal: spell.verbal,
+            somatic: spell.somatic,
+            material: spell.material,
+            duration: spell.duration,
+            class: spell.class,
+            description: spell.description,
+        });
+    };
+
     let spellsToExport: ExportSpell[] = [];
-    // if (exportOnlyShown) {
-    //     spells.forEach((spell) => {
-    //         if (spell.show) {
-    //             spellsToExport.push({
-    //                 name: spell.name,
-    //                 spellLevel: spell.spellLevel,
-    //                 spellSchool: spell.spellSchool,
-    //                 castingTime: spell.castingTime,
-    //                 range: spell.range,
-    //                 verbal: spell.verbal,
-    //                 somatic: spell.somatic,
-    //                 material: spell.material,
-    //                 duration: spell.duration,
-    //                 class: spell.class,
-    //                 description: spell.description,
-    //             });
-    //         }
-    //     });
-    // }
+    if (exportOnlyShown.value) {
+        console.log("asdasdasdasdasdsda");
+        spells.forEach((spell) => {
+            if (spell.show) {
+                addSpellToExportArray(spell);
+            }
+        });
+    } else {
+        spells.forEach((spell) => {
+            addSpellToExportArray(spell);
+        });
+    }
 
     if (fileformat.value == "JSON") {
         filename += ".json";

@@ -1,16 +1,5 @@
-export interface Spell {
+export interface Spell extends ExportSpell {
     id: number;
-    name: string;
-    spellLevel: number;
-    spellSchool: number;
-    castingTime: number;
-    range: string;
-    verbal: boolean;
-    somatic: boolean;
-    material: string;
-    duration: string;
-    class: number[];
-    description: string;
     show: boolean;
 }
 
