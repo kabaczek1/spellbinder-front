@@ -44,6 +44,30 @@ const export_data = () => {
         });
     };
 
+    const makeSpellsXML = (spellsToExport: ExportSpell[]): string => {
+        let xml = '<?xml version="1.0" encoding="UTF-8" ?>\n<spells>\n';
+        spellsToExport.forEach((spell) => {
+            xml += "  <spell>\n";
+            Object.entries(spell).forEach(([key, value]) => {
+                if (key != "class") {
+                    xml += `    <${key}>`;
+                    xml += value;
+                    xml += `</${key}>\n`;
+                }
+            });
+            xml += `    <classes>\n`;
+            spell.class.forEach((class_id) => {
+                xml += `      <class>`;
+                xml += class_id;
+                xml += `</class>\n`;
+            });
+            xml += `    </classes>\n`;
+            xml += "  </spell>\n";
+        });
+        xml += "</spells>\n";
+        return xml;
+    };
+
     let spellsToExport: ExportSpell[] = [];
     if (exportOnlyShown.value) {
         console.log("asdasdasdasdasdsda");
@@ -64,7 +88,7 @@ const export_data = () => {
     }
     if (fileformat.value == "XML") {
         filename += ".xml";
-        data = "";
+        data = makeSpellsXML(spellsToExport);
     }
     console.log(filename);
     console.log(data);
