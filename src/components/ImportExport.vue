@@ -5,6 +5,8 @@ import SpellVue from "./Spell.vue";
 import { spells, classes, casting_times, schools } from "../setup";
 import spelllvlarray from "../data/spelllvlarray.json";
 
+import axios from "axios";
+
 const fileformat = ref("JSON");
 const exportOnlyShown = ref(false);
 
@@ -62,6 +64,7 @@ const export_data = () => {
     }
     if (fileformat.value == "XML") {
         filename += ".xml";
+        data = "";
     }
     console.log(filename);
     console.log(data);
