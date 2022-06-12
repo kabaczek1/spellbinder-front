@@ -44,8 +44,6 @@ const spellFormValidation = (): Boolean => {
 };
 
 const addspell = () => {
-    // console.log(casting_times);
-    //validation
     if (!spellFormValidation()) return;
     const spellToAdd: BackendSpell = {
         name: newSpell.name,
@@ -60,15 +58,8 @@ const addspell = () => {
         classes: newSpell.class,
         description: newSpell.description,
     };
-    // console.log(newSpell.castingTime);
-    // console.log(spellToAdd.castingTimeId);
     axios.post(`${config.backend}/spells`, spellToAdd).then(
         (response) => {
-            // console.log("response");
-            // console.log(response.data);
-            // console.log("response.data.id");
-            // console.log(response.data.id);
-            // console.log(spells);
             spells.push({
                 id: response.data.id,
                 name: response.data.name,
@@ -95,11 +86,9 @@ const addspell = () => {
             alert("error");
         }
     );
-    clearform();
 };
 
 const updatespell = () => {
-    //validation
     if (!spellFormValidation()) return;
     const spellToUpdate: BackendSpell = {
         id: spellToUpdateId.value,
@@ -117,7 +106,6 @@ const updatespell = () => {
     };
     axios.put(`${config.backend}/spells`, spellToUpdate).then(
         (response) => {
-            //newSpell.id = spellToUpdateId.value;
             spells.push({
                 id: spellToUpdate.id,
                 name: spellToUpdate.name,
